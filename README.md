@@ -1,65 +1,138 @@
-# Justiva — Legal Answers, Backed by Evidence ⚖️
+# Justiva — Evidence-First Legal Intelligence & Verification ⚖️
 
-> **"AI explains. Evidence supports. Verification checks. You decide."**
+> **"Understand your contracts in plain English. Verified by Indian law."**
 
-Justiva is an AI-powered legal document intelligence and claim-level verification platform built for India. It bridges complex contract terms with plain language explanations, backed by document evidence retrieval and Indian statutory cross-referencing.
-
----
-
-## 🚀 What Has Been Built
-
-### 1. Frontend (`client/`)
-* **Technology:** React.js (Vite), Tailwind CSS, Framer Motion, Lucide React, React Router.
-* **Design System:** Forest Green (`#12332F`), Warm Ivory (`#F7F5ED`), Pure White (`#FFFFFF`), Lime (`#D9FF4A`), and Cyan (`#57E5E0`).
-* **Pages & Views:**
-  * **Landing Page (`/`):** Full 16-section SaaS showcase featuring the Hero with floating AI Verification card, The Problem, 4-step process flow, Asymmetric Feature Grid, Trust & Abstention showcase, Pricing, and FAQ accordion.
-  * **Document Workspace (`/workspace`):** Dual-pane interface with interactive clause tree, search bar, raw text inspector, and real-time AI Q&A panel with claim extraction, verification badges, and evidence citations.
-  * **Signature Evidence Graph:** Dynamic visualization mapping *Atomic Claim → Document Clause & Indian Statute → Verification State*.
-  * **Contract Comparison (`/comparison`):** Side-by-side clause diffing with risk level tags (Critical / High / Moderate / Standard).
-  * **Indian Legal Authorities (`/research`):** Searchable repository of Indian legislation (Transfer of Property Act, Indian Contract Act 1872, Model Tenancy Act) and Supreme Court precedents (Kailash Nath, Niranjan Shankar Golikari).
-  * **Lawyer Brief Generator (`/lawyer-brief`):** Formats client questions, critical provisions, evidentiary checklists, and legal ambiguities into a printable consultation brief.
-  * **Dashboard (`/dashboard`):** Repository management, KPI tracking, and new agreement uploader.
-
-### 2. Backend (`server/`)
-* **Technology:** Node.js, Express.js REST API.
-* **AI & Verification Engine:**
-  * Intent classification (Termination, Penalties, Restrictive Covenants, Dispute Resolution).
-  * Claim decomposition (breaks generated drafts into atomic factual propositions).
-  * Claim-level verification supporting 6 states: `SUPPORTED`, `PARTIALLY_SUPPORTED`, `CONTRADICTED`, `UNSUPPORTED`, `INSUFFICIENT_INFORMATION`, and `REVIEW_REQUIRED`.
-  * Deterministic citation validator ensuring exact section and quote match.
-  * Strict abstention rule: *"No evidence → No strong claim."*
-* **Storage & Seeding:** High-performance hybrid store with pre-indexed realistic Bangalore tenancy agreements and IT employment contracts with restrictive covenants.
+Justiva is an evidence-first AI legal assistant tailored for Indian tenancy agreements, employment contracts, NDAs, and business terms. It translates dense legalese into everyday language while verifying every claim against actual contract clauses and Indian statutory law.
 
 ---
 
-## 🛠️ How to Run Locally
+## ✨ Key Features
 
-### Step 1: Start Backend Server
+### 1. 🤖 Interactive Home Legal Chatbot (Powered by Google Gemini)
+- **Plain-Language Answers**: Ask any doubt in simple, everyday English (e.g. *"Can I vacate early without 30 days notice?"* or *"Is a 1-year non-compete clause valid in India?"*).
+- **File Upload & Attachment**: Attach your rental agreement, job contract, or legal notice (`.txt`, `.pdf`, `.docx`) directly inside the chat.
+- **Dual AI Engine**:
+  - **Google Gemini Engine**: Direct generative answers powered by Gemini 2.5 / 2.0 / 1.5 Flash models.
+  - **Indian Legal Grounding**: Built-in deterministic statutory legal rules ensuring accurate fallbacks even without an API key.
+- **In-Chat Key Manager**: Easily paste and save your Gemini API key right from the home page chatbot or the Dashboard settings.
+
+### 2. 📄 Document Studio (`/workspace`)
+- Dual-pane layout: Inspect agreement clauses and section breakdown on the left, ask questions on the right.
+- Real-time factual claim verification with visual badges (`SUPPORTED`, `CONTRADICTED`, `INSUFFICIENT_INFORMATION`).
+
+### 3. 🔍 Contract Comparison (`/comparison`)
+- Place two agreements side-by-side to immediately detect changes in notice periods, lock-in duration, and penalty clauses.
+
+### 4. 📚 Indian Legal Research Repository (`/research`)
+- Search authoritative Indian statutes and landmark Supreme Court cases:
+  - *Transfer of Property Act, 1882* (Sections 106, 108, 111)
+  - *The Indian Contract Act, 1872* (Sections 27, 73, 74)
+  - *Model Tenancy Act, 2021*
+  - *Kailash Nath Associates v. DDA (2015)* & *Niranjan Shankar Golikari (1967)*
+
+### 5. 📑 Lawyer Consultation Brief (`/lawyer-brief`)
+- Automatically compile client doubts, critical clauses, and evidentiary checklists into a clean 1-page summary to bring when consulting an advocate.
+
+---
+
+## 🚀 Live Deployment on Vercel
+
+Justiva is pre-configured for fullstack deployment on [Vercel](https://vercel.com) using Serverless Functions and Vite SPA routing.
+
+### Deploying via Vercel Dashboard (Recommended)
+
+1. Go to [vercel.com/new](https://vercel.com/new) and log in with your GitHub account.
+2. Select your repository: **`Anuj-yadav-5/Justiva`**.
+3. **Project Settings**:
+   - **Framework Preset**: `Vite` (or `Other`)
+   - **Root Directory**: `./` (leave default)
+   - **Build Command**: `cd client && npm install && npm run build` (or leave default defined in `vercel.json`)
+   - **Output Directory**: `client/dist`
+4. **Environment Variables** (Optional in Vercel Settings):
+   - `GEMINI_API_KEY`: Your Google Gemini API Key (starts with `AIza...`)
+   - `JWT_SECRET`: Any random secure string (e.g. `justiva_production_jwt_secret_2026`)
+5. Click **Deploy**. Vercel will build both the frontend and API serverless functions automatically!
+
+---
+
+## 🛠️ Local Development Setup
+
+### Prerequisites
+- Node.js (v18 or higher)
+- npm or yarn
+
+### 1. Clone the Repository
+```bash
+git clone https://github.com/Anuj-yadav-5/Justiva.git
+cd Justiva
+```
+
+### 2. Configure Environment Variables
+Copy the example `.env` file in the server folder:
+```bash
+cp server/.env.example server/.env
+```
+Add your Gemini API Key in `server/.env`:
+```env
+PORT=5000
+GEMINI_API_KEY=AIzaSyYourActualKeyHere
+JWT_SECRET=justiva_super_secret_jwt_key_2026
+```
+*(Note: If no API key is provided in `.env`, users can still paste their key in the UI or use the built-in Indian Legal Grounding engine).*
+
+### 3. Install & Start Backend
 ```bash
 cd server
+npm install
 npm run dev
 ```
-*Backend runs on `http://localhost:5000`*
+Backend will start on **`http://localhost:5000`**.
 
-### Step 2: Start Frontend Client
+### 4. Install & Start Frontend (in a new terminal)
 ```bash
 cd client
+npm install
 npm run dev
 ```
-*Frontend runs on `http://localhost:3000`*
+Frontend will start on **`http://localhost:3000`**.
 
 ---
 
-## 📋 Anything You Need to Do Manually?
+## 🏗️ Project Architecture
 
-The system is configured to **work out-of-the-box** without any mandatory manual setup:
-* **Database:** Runs immediately in hybrid in-memory store mode pre-seeded with sample contracts and Indian statutory data.
-* **AI Engine:** Includes an intelligent built-in legal parsing, claim extraction, and verification simulation engine.
+```
+Justiva/
+├── api/
+│   └── index.js              # Vercel Serverless Function entrypoint
+├── client/                   # React 19 + Vite + Tailwind CSS Frontend
+│   ├── src/
+│   │   ├── components/       # Chatbot, Evidence Graph, Layout, Verification Badges
+│   │   ├── context/          # Auth & State Context
+│   │   ├── pages/            # Home, Dashboard, Workspace, Comparison, Research, Brief
+│   │   └── services/         # Axios API Client with Gemini Key auto-injection
+│   ├── public/assets/        # High-res judiciary & justice assets
+│   └── vite.config.js        # Vite config with API proxy
+├── server/                   # Express.js Backend
+│   ├── src/
+│   │   ├── controllers/      # Question, Document, Comparison, Legal Controllers
+│   │   ├── routes/           # REST API Route definitions
+│   │   ├── services/ai/      # Gemini AI Service & Claim Verification Engine
+│   │   └── services/retrieval/# Indian Legal Code Knowledge Base
+│   └── server.js             # Standalone Express Server
+├── vercel.json               # Vercel deployment routing & build config
+└── README.md
+```
 
-### Optional Manual Configurations (For Production Use):
-1. **Connect Real MongoDB Atlas (Optional):**
-   * If you wish to persist data to a live MongoDB Atlas cluster, create a `server/.env` file from `server/.env.example` and set `MONGODB_URI=mongodb+srv://...`.
-2. **Connect Live OpenAI API (Optional):**
-   * If you want to use OpenAI's API directly for custom arbitrary text, set `OPENAI_API_KEY=sk-...` in `server/.env`.
-3. **Custom Documents:**
-   * You can upload any contract PDF or paste text directly via the **Dashboard** or **Workspace** upload buttons.
+---
+
+## 🔒 Security & Privacy
+
+- **Safe Defaults**: Secret keys in `.env` are strictly excluded from version control via `.gitignore`.
+- **Client-side Storage**: When users enter their API key in the browser, it is stored in the browser's local storage and encrypted in transit.
+- **Safety Boundaries**: The AI verification engine flags ungrounded claims with abstention notices (*"This provision is missing from your agreement"*).
+
+---
+
+## ⚖️ Disclaimer
+
+Justiva is designed as an educational and document comprehension tool to help individuals understand their agreements in plain English and reference statutory frameworks. It is **not a law firm** and does not constitute formal legal counsel. For court litigation, always consult a qualified advocate.
