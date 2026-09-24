@@ -1,0 +1,166 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    --font-heading: 'DM Sans', 'Inter', sans-serif;
+    --font-mono: 'JetBrains Mono', monospace;
+
+    --color-forest: #12332F;
+    --color-forest-dark: #0F2D29;
+    --color-forest-light: #1A443E;
+    --color-forest-surface: #153B36;
+    
+    --color-ivory: #F7F5ED;
+    --color-ivory-dark: #EBE7DC;
+    --color-ivory-light: #FAF9F4;
+    
+    --color-lime: #D9FF4A;
+    --color-lime-hover: #C6EE3B;
+    --color-cyan: #57E5E0;
+    
+    --color-text-main: #17201E;
+    --color-text-muted: #5C6662;
+    --color-text-subtle: #8A928F;
+  }
+
+  body {
+    font-family: var(--font-sans);
+    background-color: var(--color-ivory);
+    color: var(--color-text-main);
+    overflow-x: hidden;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
+    letter-spacing: -0.025em;
+  }
+}
+
+/* Custom Utilities and Animations */
+.bg-forest {
+  background-color: #12332F;
+}
+
+.bg-forest-dark {
+  background-color: #0F2D29;
+}
+
+.bg-forest-surface {
+  background-color: #153B36;
+}
+
+.bg-forest-light {
+  background-color: #1A443E;
+}
+
+.text-forest {
+  color: #12332F;
+}
+
+.bg-ivory {
+  background-color: #F7F5ED;
+}
+
+.bg-ivory-dark {
+  background-color: #EBE7DC;
+}
+
+.bg-lime-accent {
+  background-color: #D9FF4A;
+}
+
+.text-lime-accent {
+  color: #D9FF4A;
+}
+
+.border-lime-accent {
+  border-color: #D9FF4A;
+}
+
+.bg-cyan-accent {
+  background-color: #57E5E0;
+}
+
+.text-cyan-accent {
+  color: #57E5E0;
+}
+
+/* Glassmorphic & Glow Effects */
+.glass-forest {
+  background: rgba(18, 51, 47, 0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.glass-card {
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(23, 32, 30, 0.08);
+}
+
+.glow-lime {
+  box-shadow: 0 0 30px rgba(217, 255, 74, 0.25);
+}
+
+.glow-cyan {
+  box-shadow: 0 0 30px rgba(87, 229, 224, 0.25);
+}
+
+/* Verification State Badges */
+.badge-supported {
+  background-color: #E6F7E9;
+  color: #0A6C38;
+  border: 1px solid #B7E8C1;
+}
+
+.badge-partially-supported {
+  background-color: #FEF3C7;
+  color: #92400E;
+  border: 1px solid #FDE68A;
+}
+
+.badge-contradicted {
+  background-color: #FEE2E2;
+  color: #991B1B;
+  border: 1px solid #FECACA;
+}
+
+.badge-unsupported {
+  background-color: #FFEDD5;
+  color: #9A3412;
+  border: 1px solid #FED7AA;
+}
+
+.badge-insufficient {
+  background-color: #F1F5F9;
+  color: #475569;
+  border: 1px solid #CBD5E1;
+}
+
+.badge-review-required {
+  background-color: #EDE9FE;
+  color: #5B21B6;
+  border: 1px solid #DDD6FE;
+}
+
+/* Custom Scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(18, 51, 47, 0.2);
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(18, 51, 47, 0.4);
+}
